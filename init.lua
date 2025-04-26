@@ -1,8 +1,4 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
-vim.cmd("set number")
+vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -19,61 +15,8 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = {
-	{
-		'ribru17/bamboo.nvim',
-		
-		lazy = false,
-		
-		priority = 1000,
-		
-		config = function()
-			require('bamboo').setup {
-				-- optional configuration here
-			}
-			require('bamboo').load()
-		end,
-	},
-	
-  {
-		'nvim-telescope/telescope.nvim', tag = '0.1.8',
-		-- or                              , branch = '0.1.x',
-		dependencies = { 'nvim-lua/plenary.nvim' }
-	
-	},
 
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = ":TSUpdadte"
-  }
+require("lazy").setup("plugins")
 
-}
+require("vim-set")
 
-local opts = {}
-
-require("lazy").setup(plugins, opts)
-
-vim.cmd.colorscheme "bamboo"
-
-
--- telescope configure
-local builtin = require("telescope.builtin")
-
-vim.g.mapleader = " "
-
-vim.keymap.set('n', "<leader>pf", builtin.find_files, {})
-
-vim.keymap.set('n', "<leader>ps", builtin.live_grep, {})
-
-
--- treesitter config
-
-local tree_config = require("nvim-treesitter.configs")
-
-tree_config.setup({
-  ensure_installed = {"lua", "c", "rust", "verilog", "python"},
-
-  highlight = { enable = true},
-
-  indent = {enable = true},
-})
