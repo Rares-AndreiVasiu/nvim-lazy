@@ -8,7 +8,7 @@ return
         local tree_config = require("nvim-treesitter.configs")
 
         tree_config.setup({
-            ensure_installed = {"lua", "c", "rust", "verilog", "python"},
+            auto_install = true,
 
             highlight = { enable = true},
 
