@@ -49,7 +49,15 @@ return {
 
             -- rust language server
             lspconfig.rust_analyzer.setup({
-                capabilities = capabilities
+                capabilities = capabilities,
+
+                settings = {
+                    ["rust_analyzer"] = {
+                        cargo = {allFeatures = true},
+
+                        checkOnSave = {command = "clippy"},
+                    },
+                },
             })
 
             -- verilog language server
